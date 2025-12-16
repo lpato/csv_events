@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EventService {
 
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
     public List<Event> getEvents() {
 
