@@ -1,0 +1,3 @@
+app:
+  csv:
+    file: /var/app/data/events.csv

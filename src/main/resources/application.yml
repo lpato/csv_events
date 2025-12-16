@@ -1,0 +1,3 @@
+app:
+  csv:
+    file: ./data/events.csv

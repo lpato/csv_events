@@ -1,0 +1,9 @@
+{
+    "properties": [
+        {
+            "name": "app.csv.file",
+            "type": "java.lang.String",
+            "description": "list of events in cvs format"
+        }
+    ]
+}
