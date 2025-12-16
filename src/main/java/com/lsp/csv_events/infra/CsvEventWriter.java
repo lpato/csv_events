@@ -13,10 +13,13 @@ import org.springframework.stereotype.Component;
 
 import com.lsp.csv_events.domain.Event;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class CsvEventWriter {
 
-    private CsvEventProperties csvEventProperties;
+    private final CsvEventProperties csvEventProperties;
 
     void write(List<Event> events) {
 
