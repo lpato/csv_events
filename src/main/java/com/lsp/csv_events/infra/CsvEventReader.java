@@ -42,8 +42,8 @@ public class CsvEventReader {
     private Event toEvent(String[] split) {
 
         Long id = Long.parseLong(split[0]);
-        LocalDateTime start = LocalDateTime.parse(split[3]);
-        LocalDateTime end = LocalDateTime.parse(split[4]);
+        LocalDateTime start = LocalDateTime.parse(split[3].trim());
+        LocalDateTime end = LocalDateTime.parse(split[4].trim());
 
         return new Event(id, split[1], split[2], start, end);
 

@@ -42,7 +42,7 @@ public class CsvEventWriter {
 
     private String eventJoin(Event event) {
 
-        return new StringJoiner(", ")
+        return new StringJoiner(",")
                 .add(String.valueOf(event.id()))
                 .add(event.name())
                 .add(event.description())
