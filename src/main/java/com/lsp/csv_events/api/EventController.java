@@ -1,20 +1,20 @@
 package com.lsp.csv_events.api;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.lsp.csv_events.domain.Event;
 import com.lsp.csv_events.domain.EventService;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
+@Slf4j
 public class EventController {
 
     private final EventService eventService;
@@ -35,8 +35,11 @@ public class EventController {
 
     @PostMapping
     public void saveEvents(@RequestBody List<Event> events) {
+        log.info("Received request to save {} events", events.size());
 
         eventService.saveEvents(events);
+        log.info("Successfully saved {} events", events.size());
+
     }
 
 }
