@@ -83,6 +83,12 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.12</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*Application*</exclude>
+						<exclude>**/*Properties*</exclude>
+					</excludes>
+				</configuration>
 
 				<executions>
 					<!-- Attach agent before tests -->

@@ -2,9 +2,12 @@ package com.lsp.csv_events.infra;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -68,4 +71,22 @@ class CsvEventWriterTest {
         assertEquals(1, lines.size());
         assertFalse(lines.get(0).contains("old content"));
     }
+
+    @Test
+    void write_shouldThrowUncheckedIOException_whenFileCannotBeWritten() {
+        // given
+        CsvEventProperties properties = mock(CsvEventProperties.class);
+
+        // Use an invalid path (directory instead of file)
+        when(properties.getFile()).thenReturn(Path.of(".").toString());
+
+        CsvEventWriter writer = new CsvEventWriter(properties);
+
+        List<Event> events = List.of(
+                mock(Event.class));
+
+        // when / then
+        assertThrows(UncheckedIOException.class, () -> writer.write(events));
+    }
+
 }

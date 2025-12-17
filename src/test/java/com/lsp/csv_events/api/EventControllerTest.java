@@ -49,4 +49,58 @@ public class EventControllerTest {
 
         verify(eventService, times(1)).getEvents();
     }
+
+    @Test
+    public void testGetEventByIdReturnsEvent() throws Exception {
+        Event event = new Event(1L, "Event A", null, null, null);
+        when(eventService.getEvent(1L)).thenReturn(java.util.Optional.of(event));
+
+        mockMvc.perform(get("/events/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.name").value("Event A"));
+
+        verify(eventService, times(1)).getEvent(1L);
+    }
+
+    @Test
+    public void testGetEventByIdNotFound() throws Exception {
+        when(eventService.getEvent(999L)).thenReturn(java.util.Optional.empty());
+
+        mockMvc.perform(get("/events/999"))
+                .andExpect(status().isNotFound());
+
+        verify(eventService, times(1)).getEvent(999L);
+    }
+
+    @Test
+    public void testSaveEventsSuccessfully() throws Exception {
+        Event event1 = new Event(1L, "Event A", null, null, null);
+        Event event2 = new Event(2L, "Event B", null, null, null);
+        List<Event> events = List.of(event1, event2);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(events);
+
+        mockMvc.perform(post("/events")
+                .contentType("application/json")
+                .content(json))
+                .andExpect(status().isOk());
+
+        verify(eventService, times(1)).saveEvents(events);
+    }
+
+    @Test
+    public void testSaveEmptyEventsList() throws Exception {
+        List<Event> events = List.of();
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(events);
+
+        mockMvc.perform(post("/events")
+                .contentType("application/json")
+                .content(json))
+                .andExpect(status().isOk());
+
+        verify(eventService, times(1)).saveEvents(events);
+    }
 }
