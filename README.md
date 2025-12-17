@@ -10,6 +10,7 @@ A Spring Boot application that manages Events via REST APIs. It supports CSV-bas
 - [CSV Configuration Properties](#CSV-configuration-properties)
 - [REST API](#REST-API)
 - [How to Run](#how-to-run)
+- [Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 
 
 ## 🚀 Features
@@ -175,6 +176,9 @@ mvn clean spring-boot:run
 ```bash
 http://localhost:8080
 ```
+
+
+
 
 
 
