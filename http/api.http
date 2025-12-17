@@ -1,4 +1,4 @@
-### health check
+### read csv
 GET http://localhost:8080/events
 
 
